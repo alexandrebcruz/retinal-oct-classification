@@ -1,0 +1,17 @@
+# Credenciais: nunca versionar
+kaggle.json
+client_secrets*.json
+.env
+*.env
+
+# Dataset e artefatos grandes: baixe da fonte ou gere localmente
+OCT2017*/
+oct2017/
+*.zip
+dados_aumentados_*.pkl
+*.npz
+
+# Python e Jupyter
+__pycache__/
+.ipynb_checkpoints/
+.venv/

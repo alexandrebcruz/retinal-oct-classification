@@ -1,0 +1,87 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$(function() {
+    $('#upload-file-btn').click(function() {
+        var form_data = new FormData($('#upload-file')[0]);
+		$("#status").html('Aguarde até a predição ser concluída');
+		$('#img_input').prop('src', '');
+		$('#img_mask').prop('src', '');
+		$('#img_inputmask').prop('src', '');
+		$('#img_probs').prop('src', '');
+		$("#predicao").html('');
+        $.ajax({
+            type: 'POST',
+            url: '/uploadajax',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+				img_input = data.img_input;
+				img_mask = data.img_mask;
+				img_inputmask = data.img_inputmask;
+				predito = data.predito;
+				img_probs = data.img_probs;
+				$("#status").html('');
+				$('#img_input').prop('src', img_input);
+				$('#img_mask').prop('src', img_mask);
+				$('#img_inputmask').prop('src', img_inputmask);
+				$('#img_probs').prop('src', img_probs);
+				$("#predicao").html('Classe Predita: ' + predito);
+            },
+        });
+    });
+});
+</script>
+
+<style>
+    * {
+        font-family: "Rubik", "sans-serif";
+    }
+
+    div {
+        text-align: center;
+        margin-top: 0px;
+    }
+
+    h1 {
+        color: black;
+        font-size: 24pt;
+    }
+
+    p {
+        font-size: 16pt;
+    }
+</style>
+
+<div>
+    <h1>Projeto Tomography-OCT: Grupo Turings</h1>
+    <p>Esse site foi visitado {{ count }} vezes.</p>
+	
+	<form id="upload-file" method="post" enctype="multipart/form-data">
+		<fieldset>
+			<label for="file">Escolha a Imagem: </label></br>
+			<input name="file" type="file">
+		</fieldset>
+		<fieldset>
+			<button id="upload-file-btn" type="button" style="width:25%; height:5%;">Enviar</button>
+		</fieldset>
+	</form>
+	
+	<p>Resultado da Análise:</p></br>
+	<p id="status"></p>
+	
+	<div>
+		<img style="max-width:100%;height:auto;" id="img_input"></br></br>
+		<img style="max-width:100%;height:auto;" id="img_mask"></br></br>
+		<img style="max-width:100%;height:auto;" id="img_inputmask"></br></br>
+		<img style="max-width:100%;height:auto;" id="img_probs"></br>
+		<p id="predicao"></p>
+	</div>
+	
+</div>
