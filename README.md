@@ -54,6 +54,8 @@ dados/          divisão por paciente usada nos notebooks (treino, validação, 
 docs/           relatório final (Markdown, com figuras) e apresentação final (PDF)
 ```
 
+O experimento [`experimentos/alexandre_cruz/autoencoder_exploratorio.ipynb`](experimentos/alexandre_cruz/autoencoder_exploratorio.ipynb) usa as bibliotecas `Ale*`, de Alexandre Béo da Cruz, para avaliar um CatBoost treinado sobre as features do autoencoder: AUC, KS, ganho de informação e ponto de corte, em treino e validação. Uma versão mais recente delas está publicada em [tabular-ml-toolkit](https://github.com/alexandrebcruz/tabular-ml-toolkit).
+
 ## Como reproduzir
 
 1. **Ambiente.** Os notebooks rodaram no Google Colab com GPU, em Python 3.7 e TensorFlow 2.5.
